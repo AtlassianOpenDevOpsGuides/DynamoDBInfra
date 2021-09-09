@@ -1,0 +1,25 @@
+Resources:
+  ImageLabels:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        -
+          AttributeName: "Id"
+          AttributeType: "S"
+      KeySchema:
+        -
+          AttributeName: "Id"
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+      StreamSpecification:
+        StreamViewType: "NEW_IMAGE"
+      TableName: "ImageLabels"
+
+Outputs:
+  ImageLabelStreamArn:
+    Description: "ImageLabels stream arn"
+    Value: !GetAtt ImageLabels.StreamArn
+    Export:
+      Name: 'ImageLabelStreamArn'
